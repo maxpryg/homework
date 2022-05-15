@@ -15,7 +15,7 @@ class TestReverseIter(unittest.TestCase):
     def test_input_data_is_int(self):
         with self.assertRaises(TypeError):
             ReverseIter(123)
-#
+
     def test_input_data_is_tuple(self):
         with self.assertRaises(TypeError):
             ReverseIter(tuple())
