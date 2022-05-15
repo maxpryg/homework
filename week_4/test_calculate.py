@@ -1,5 +1,5 @@
 import unittest
-from calculate import calculate, FormulaError
+from calculator import calculate, FormulaError
 from random import randint
 
 
@@ -22,6 +22,9 @@ class TestCalculate(unittest.TestCase):
                 self.op_1 = str(randint(1, 20))
                 self.op_2 = str(randint(1, 20))
                 self.assertEqual(
-                    calculate(self.op_1 + operator + self.op_2),
+                    calculate(self.op_1 + ' ' + operator + ' ' + self.op_2),
                     float(eval(self.op_1 + operator + self.op_2)))
 
+
+if __name__ == '__main__':
+    unittest.main()
