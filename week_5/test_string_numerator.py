@@ -62,15 +62,11 @@ class TestStringNumerator(unittest.TestCase):
             for correct_line, output_line in zip(correct_file, output_file):
                 self.assertEqual(correct_line, output_line)
 
-#     @patch('builtins.input', side_effect=[input_file_name, output_file_name])
-#     def test_output_file(self, mock_inputs):
-#         """Проверяет правильность записи целевого файла, путем построчного
-#         сравнение целевого и контрольного файлов"""
-#         input_file = self.mock()
-#         print(input_file)
-#         output_file = self.mock()
-#         string_numerator()
-#         print(input_file)
+    def test_output_and_input_filenames(self, mock_inputs):
+        input_file = mock_inputs()
+        output_file = mock_inputs()
+        self.assertEqual(input_file, self.input_file_name)
+        self.assertEqual(output_file, self.output_file_name)
 
 
 if __name__ == '__main__':
