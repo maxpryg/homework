@@ -18,9 +18,14 @@ def remove_punctuation_marks(sentence, add_signs=''):
 def create_word_list(sentence):
     """Принимает на вход строку и возвращает список со словами из этой
     строки."""
-    pass
+
+    return remove_punctuation_marks(sentence).split()
 
 
 def find_longest_word(sentence):
     """Принимает на вход строку и возвращает самое длинное слово из этой
     строки."""
+
+    word_list = create_word_list(sentence)
+    word_list_with_length = ((len(w), w) for w in word_list)
+    return max(word_list_with_length)[1]

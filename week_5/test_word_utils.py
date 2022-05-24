@@ -61,5 +61,22 @@ class TestRemovePunctuationMarks(unittest.TestCase):
         self.assertEqual(self.correct_sentence, self.output_sentenct)
 
 
+class TestCreateWordList(unittest.TestCase):
+    def test_returned_correct_word_list(self):
+        self.input_sentence = '\'Ok\'. a, b; all: "yes!" sure? hey-hey'
+        self.correct_sentence = ['Ok', 'a', 'b', 'all', 'yes', 'sure', 'hey',
+                                 'hey']
+        self.output_sentenct = create_word_list(self.input_sentence)
+        self.assertEqual(self.correct_sentence, self.output_sentenct)
+
+
+class TestFindLongestWord(unittest.TestCase):
+    def test_returned_longest_word(self):
+        self.input_sentence = '\'Ok\'. a, b; all: "yes!" sure? hey-hey'
+        self.correct_longest_word = 'sure'
+        self.output_longest_word = find_longest_word(self.input_sentence)
+        self.assertEqual(self.correct_longest_word, self.output_longest_word)
+
+
 if __name__ == '__main__':
     unittest.main()
