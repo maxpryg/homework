@@ -1,12 +1,12 @@
 from django.urls import path
 
-from .views import hellodjango, greeting, fulldate, year, day, month
+from . import views
 
 urlpatterns = [
-    path('', hellodjango, name='hellodjango'),
-    path('date/', fulldate, name='fulldate'),
-    path('date/year/', year, name='year'),
-    path('date/day/', day, name='day'),
-    path('date/month/', month, name='month'),
-    path('<str:name>/', greeting, name='greeting'),
+    path('', views.hellodjango, name='hellodjango'),
+    path('date/', views.fulldate, name='fulldate'),
+    path('date/year/', views.year, name='year'),
+    path('date/day/', views.day, name='day'),
+    path('date/month/', views.month, name='month'),
+    path('<str:name>/', views.greeting, name='greeting'),
 ]
