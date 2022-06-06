@@ -1,0 +1,7 @@
+1. Физический (physical layer)
+2. Канальный (data link layer)
+3. Сетевой (network layer)
+4. Транспортный (transport layer)
+5. Сеансовый (session layer)
+6. Представления (presentation layer)
+7. Прикладной (application layer)
