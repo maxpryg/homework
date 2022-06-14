@@ -1,0 +1,20 @@
+# python cache dir
+__pycache__/
+
+# rope completition dir
+.ropeproject
+
+# task files
+task*
+
+# secret key
+dsk
+
+# swap files
+.swp
+
+# virtual environment dirs and files
+bin/
+lib/
+lib64
+pyvenv.cfg
