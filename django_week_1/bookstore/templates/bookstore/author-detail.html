@@ -5,8 +5,16 @@
 {% endblock %}
 
 {% block content %}
-  {{ author.first_name }} {{ author.last_name }}
-  {{ author.age}}
-  <a href="{% url 'author_book_list' author.id %}">More author's books</a>
-  <a href="{% url 'index' %}">Back to bookstore</a>
+  <div class="row">
+    <div class="col g-0 bg-success p-2 text-dark bg-opacity-10 shadow-lg p-3 bg-body rounded">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-primary">{{ author.first_name }} {{ author.last_name }}</h3>
+          <h6 class="text-black-50">Age: {{ author.age}}</h6>
+          <a href="{% url 'author_book_list' author.id %}" class="btn btn-primary">More author's books</a>
+          <a href="{% url 'index' %}" class="btn btn-primary">Back to bookstore</a>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
