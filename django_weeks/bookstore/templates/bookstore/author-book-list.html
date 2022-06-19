@@ -12,7 +12,7 @@
           <h3 class="card-title text-primary">{{ author.first_name }} {{ author.last_name }}</h3>
 
           <div class="list-group mb-2">
-          {% for book in book_list %}
+          {% for book in books %}
             <a href="{% url 'book_detail' book.id %}" class="list-group-item list-group-item-action">{{ book.title }}</a>
           {% endfor %}
           </div>

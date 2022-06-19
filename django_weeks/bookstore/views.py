@@ -1,31 +1,34 @@
 from django.shortcuts import render
 
-from .helper_functions import get_object_by_id_or_404
-from .data import books, authors
+from .models import Book, Author
 
 
 def index(request):
     """Bookstore homepage view"""
 
+    books = Book.objects.all()
+
+    if request.method == "GET" and "search_text" in request.GET:
+        search_text = request.GET['search_text']
+        books = books.filter(title__icontains=search_text)
+
     return render(request, 'bookstore/index.html',
-                  context={'books': books, 'authors': authors})
+                  context={'books': books})
 
 
 def book_detail(request, id):
     """Book detail view"""
 
-    book = get_object_by_id_or_404(id, books)
-
-    author = get_object_by_id_or_404(book['author_id'], authors)
+    book = Book.objects.get(pk=id)
 
     return render(request, 'bookstore/book-detail.html',
-                  context={'book': book, 'author': author})
+                  context={'book': book})
 
 
 def author_detail(request, id):
     """Author detail view"""
 
-    author = get_object_by_id_or_404(id, authors)
+    author = Author.objects.get(pk=id)
 
     return render(request, 'bookstore/author-detail.html',
                   context={'author': author})
@@ -34,12 +37,8 @@ def author_detail(request, id):
 def author_book_list(request, id):
     """View returns all books of selected author"""
 
-    author = get_object_by_id_or_404(id, authors)
-
-    book_list = []
-    for book in books:
-        if book['author_id'] == id:
-            book_list.append(book)
+    author = Author.objects.get(pk=id)
+    books = author.get_all_author_books()
 
     return render(request, 'bookstore/author-book-list.html',
-                  context={'book_list': book_list, 'author': author})
+                  context={'books': books, 'author': author})

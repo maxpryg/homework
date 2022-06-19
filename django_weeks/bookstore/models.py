@@ -48,3 +48,8 @@ class Author(models.Model):
             Author.objects.create(first_name=author['first_name'],
                                   last_name=author['last_name'],
                                   age=author['age'])
+
+    def get_all_author_books(self):
+        """Return all books of certain author"""
+
+        return Book.objects.filter(author__exact=self)

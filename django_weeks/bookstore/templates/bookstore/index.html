@@ -8,7 +8,15 @@
   <div class="row row-cols-1">
     <div class="col g-0 bg-success p-2 text-dark bg-opacity-10 shadow-lg p-3 bg-body rounded">
       <h1 class="card-title text-primary text-opacity-50 text-center">Welcome to the bookstore</h1>
-      </div>
+    </div>
+
+    <div class="col g-0 bg-success p-2 text-dark bg-opacity-10 shadow-lg p-3 bg-body rounded">
+      <form action="" method="get">
+        <input type="text" name="search_text">
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
     </div>
   <div class="row row-cols-3">
     {% for book in books %}
@@ -17,12 +25,7 @@
         <div class="card-body">
           <h4 class="card-title text-primary">{{ book.title }}</h4>
           <h6 class="text-black-50">{{ book.released_year}}</h6>
-
-          {% for author in authors %}
-            {% if book.author_id == author.id %}
-            <h5 class="text-secondary">{{ author.first_name }} {{ author.last_name }}</h5>
-            {% endif %}
-          {% endfor %}
+          <h5 class="text-secondary">{{ book.author.first_name }} {{ book.author.last_name }}</h5>
 
           <p class="card-text">{{ book.description|slice:100 }}...
           <a href="{% url 'book_detail' book.id %}" class="card-link">detail description</a></p>
