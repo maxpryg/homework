@@ -13,12 +13,12 @@
 
           <div class="list-group mb-2">
           {% for book in books %}
-            <a href="{% url 'book_detail' book.id %}" class="list-group-item list-group-item-action">{{ book.title }}</a>
+            <a href="{% url 'bookstore:book_detail' book.id %}" class="list-group-item list-group-item-action">{{ book.title }}</a>
           {% endfor %}
           </div>
 
-          <a href="{% url 'author_detail' author.id %}" class="btn btn-primary">About author</a>
-          <a href="{% url 'index' %}" class="btn btn-primary">Back to bookstore</a>
+          <a href="{% url 'bookstore:author_detail' author.id %}" class="btn btn-primary">About author</a>
+          <a href="{% url 'bookstore:index' %}" class="btn btn-primary">Back to bookstore</a>
         </div>
       </div>
     </div>

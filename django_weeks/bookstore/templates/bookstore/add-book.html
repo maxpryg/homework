@@ -9,10 +9,12 @@
     <div class="col g-0 bg-success p-2 text-dark bg-opacity-10 shadow-lg p-3 bg-body rounded">
       <div class="card">
         <div class="card-body">
-          <h3 class="card-title text-primary">{{ author.first_name }} {{ author.last_name }}</h3>
-          <h6 class="text-black-50">Age: {{ author.age}}</h6>
-          <a href="{% url 'bookstore:author_book_list' author.id %}" class="btn btn-primary">More author's books</a>
-          <a href="{% url 'bookstore:index' %}" class="btn btn-primary">Back to bookstore</a>
+          <form action="" method="post">
+            {% csrf_token %}
+            <a href="{% url 'bookstore:add_author' %}" class="btn btn-primary">Add author</a>
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+          </form>
         </div>
       </div>
     </div>

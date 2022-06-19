@@ -13,9 +13,9 @@
           <h6 class="text-black-50">{{ book.released_year}}</h6>
           <h5 class="text-secondary">{{ book.author.first_name }} {{ book.author.last_name }}</h5>
           <p class="card-text">{{ book.description }}</p>
-          <a href="{% url 'author_detail' book.author.id %}"
+          <a href="{% url 'bookstore:author_detail' book.author.id %}"
                 class="btn btn-primary">About author</a>
-          <a href="{% url 'index' %}" class="btn btn-primary">Back to bookstore</a>
+          <a href="{% url 'bookstore:index' %}" class="btn btn-primary">Back to bookstore</a>
         </div>
       </div>
     </div>

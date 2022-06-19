@@ -28,7 +28,7 @@
           <h5 class="text-secondary">{{ book.author.first_name }} {{ book.author.last_name }}</h5>
 
           <p class="card-text">{{ book.description|slice:100 }}...
-          <a href="{% url 'book_detail' book.id %}" class="card-link">detail description</a></p>
+          <a href="{% url 'bookstore:book_detail' book.id %}" class="card-link">detail description</a></p>
         </div>
       </div>
     </div>

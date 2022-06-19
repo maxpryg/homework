@@ -8,11 +8,11 @@ class IndexViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
-        response = self.client.get(reverse('index'))
+        response = self.client.get(reverse('bookstore:index'))
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
-        response = self.client.get(reverse('index'))
+        response = self.client.get(reverse('bookstore:index'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'bookstore/index.html')
 
@@ -23,11 +23,11 @@ class AuthorViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
-        response = self.client.get(reverse('author_detail', args=[1]))
+        response = self.client.get(reverse('bookstore:author_detail', args=[1]))
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
-        response = self.client.get(reverse('author_detail', args=[1]))
+        response = self.client.get(reverse('bookstore:author_detail', args=[1]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'bookstore/author-detail.html')
 
@@ -38,11 +38,11 @@ class BookViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
-        response = self.client.get(reverse('book_detail', args=[1]))
+        response = self.client.get(reverse('bookstore:book_detail', args=[1]))
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
-        response = self.client.get(reverse('book_detail', args=[1]))
+        response = self.client.get(reverse('bookstore:book_detail', args=[1]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'bookstore/book-detail.html')
 
@@ -53,10 +53,10 @@ class AuthorBookListViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
-        response = self.client.get(reverse('author_book_list', args=[1]))
+        response = self.client.get(reverse('bookstore:author_book_list', args=[1]))
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
-        response = self.client.get(reverse('author_book_list', args=[1]))
+        response = self.client.get(reverse('bookstore:author_book_list', args=[1]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'bookstore/author-book-list.html')

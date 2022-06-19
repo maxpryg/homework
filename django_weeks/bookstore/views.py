@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from .models import Book, Author
+from .forms import AddAuthorForm, AddBookForm
 
 
 def index(request):
@@ -42,3 +45,31 @@ def author_book_list(request, id):
 
     return render(request, 'bookstore/author-book-list.html',
                   context={'books': books, 'author': author})
+
+
+def add_book(request):
+    """View to add book to the bookstore"""
+
+    if request.method == 'POST':
+        form = AddBookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('bookstore:index'))
+    else:
+        form = AddBookForm()
+
+    return render(request, 'bookstore/add-book.html', {'form': form})
+
+
+def add_author(request):
+    """View to add author to the bookstore"""
+
+    if request.method == 'POST':
+        form = AddAuthorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('bookstore:add_book'))
+    else:
+        form = AddAuthorForm()
+
+    return render(request, 'bookstore/add-author.html', {'form': form})
