@@ -16,9 +16,19 @@ class Book(models.Model):
         return f'{self.title}, {self.author}'
 
     @staticmethod
-    def create_books_from_dict(books):
+    def create_books_from_dict(books, authors):
         for book in books:
-            Book.objects.create(author=book.author,
+            # loop over dictionary of authors, to get author of current book
+            for author in authors:
+                if book['author_id'] == author['id']:
+                    author_dict = author
+
+            # get author of the current book from DB
+            author = Author.objects.get(
+                last_name__exact=author_dict['last_name'])
+
+            # save book to DB
+            Book.objects.create(author=author,
                                 title=book['title'],
                                 released_year=book['released_year'],
                                 description=book['description'])
