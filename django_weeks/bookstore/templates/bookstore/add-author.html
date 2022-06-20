@@ -5,17 +5,14 @@
 {% endblock %}
 
 {% block content %}
+  {% include 'bookstore/menu.html' %}
   <div class="row">
     <div class="col g-0 bg-success p-2 text-dark bg-opacity-10 shadow-lg p-3 bg-body rounded">
-      <div class="card">
-        <div class="card-body">
           <form action="" method="post">
             {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Submit">
+            {{ form.as_p}}
+            <input type="submit" value="Add author">
           </form>
-        </div>
-      </div>
     </div>
   </div>
 {% endblock %}

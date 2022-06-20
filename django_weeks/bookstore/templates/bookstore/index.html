@@ -6,21 +6,21 @@
 
 {% block content %}
   <div class="row row-cols-1">
-    <div class="col g-0 bg-success p-2 text-dark bg-opacity-10 shadow-lg p-3 bg-body rounded">
+    <div class="col g-0 bg-success text-dark bg-opacity-10 shadow-lg p-2 bg-body rounded">
       <h1 class="card-title text-primary text-opacity-50 text-center">Welcome to the bookstore</h1>
     </div>
+  </div>
 
-    <div class="col g-0 bg-success p-2 text-dark bg-opacity-10 shadow-lg p-3 bg-body rounded">
-      <form action="" method="get">
-        <input type="text" name="search_text">
-        <input type="submit" value="Submit">
-      </form>
-    </div>
+  {% include 'bookstore/menu.html' %}
 
-    </div>
+    <form action="" method="get">
+      <input class="border-info rounded" type="text" name="search_text" placeholder="Enter book title">
+      <input class="btn btn-info text-white" type="submit" value="Search">
+    </form>
+
   <div class="row row-cols-3">
     {% for book in books %}
-    <div class="col g-0 bg-success p-2 text-dark bg-opacity-10 shadow-lg p-3 bg-body rounded">
+    <div class="col g-0 bg-success text-dark bg-opacity-10 shadow-lg p-2 bg-body rounded">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title text-primary">{{ book.title }}</h4>

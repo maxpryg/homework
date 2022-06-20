@@ -1,22 +1,18 @@
 {% extends "base.html" %}
 
 {% block title %}
-<title>{{ author.first_name }} {{ author.last_name }}</title>
+<title>Add book</title>
 {% endblock %}
 
 {% block content %}
+  {% include 'bookstore/menu.html' %}
   <div class="row">
     <div class="col g-0 bg-success p-2 text-dark bg-opacity-10 shadow-lg p-3 bg-body rounded">
-      <div class="card">
-        <div class="card-body">
-          <form action="" method="post">
-            {% csrf_token %}
-            <a href="{% url 'bookstore:add_author' %}" class="btn btn-primary">Add author</a>
-            {{ form.as_p }}
-            <input type="submit" value="Submit">
-          </form>
-        </div>
-      </div>
+      <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Add book">
+      </form>
     </div>
   </div>
 {% endblock %}

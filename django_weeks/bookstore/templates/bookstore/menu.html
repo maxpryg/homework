@@ -1,0 +1,11 @@
+<div class="row row-cols-1">
+  <div class="col g-0 bg-success text-dark bg-opacity-10 shadow-lg p-2 bg-body rounded">
+    <nav class="nav justify-content-center">
+      <a class="nav-link active" aria-current="page" href="{% url 'bookstore:index' %}">Bookstore</a>
+      <a class="nav-link" href="{% url 'bookstore:add_author' %}">Add author</a>
+      <a class="nav-link" href="{% url 'bookstore:add_book' %}">Add book</a>
+      {% block search %}
+      {% endblock %}
+    </nav>
+  </div>
+</div>

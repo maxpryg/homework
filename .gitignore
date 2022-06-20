@@ -11,7 +11,7 @@ task*
 dsk
 
 # swap files
-.swp
+*.swp
 
 # virtual environment dirs and files
 bin/
