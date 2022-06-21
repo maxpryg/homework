@@ -8,7 +8,6 @@ from .forms import AddAuthorForm, AddBookForm
 
 def index(request):
     """Bookstore homepage view"""
-
     books = Book.objects.all()
 
     if request.method == "GET" and "search_text" in request.GET:
@@ -21,7 +20,6 @@ def index(request):
 
 def book_detail(request, id):
     """Book detail view"""
-
     book = Book.objects.get(pk=id)
 
     return render(request, 'bookstore/book-detail.html',
@@ -30,7 +28,6 @@ def book_detail(request, id):
 
 def author_detail(request, id):
     """Author detail view"""
-
     author = Author.objects.get(pk=id)
 
     return render(request, 'bookstore/author-detail.html',
@@ -39,7 +36,6 @@ def author_detail(request, id):
 
 def author_book_list(request, id):
     """View returns all books of selected author"""
-
     author = Author.objects.get(pk=id)
     books = author.get_all_author_books()
 
@@ -49,7 +45,6 @@ def author_book_list(request, id):
 
 def add_book(request):
     """View to add book to the bookstore"""
-
     if request.method == 'POST':
         form = AddBookForm(request.POST)
         if form.is_valid():
@@ -63,7 +58,6 @@ def add_book(request):
 
 def add_author(request):
     """View to add author to the bookstore"""
-
     if request.method == 'POST':
         form = AddAuthorForm(request.POST)
         if form.is_valid():
