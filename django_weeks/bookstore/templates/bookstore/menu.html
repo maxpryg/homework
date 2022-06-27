@@ -4,6 +4,8 @@
       <a class="nav-link active" aria-current="page" href="{% url 'bookstore:index' %}">Bookstore</a>
       <a class="nav-link" href="{% url 'bookstore:add_author' %}">Add author</a>
       <a class="nav-link" href="{% url 'bookstore:add_book' %}">Add book</a>
+      <a class="nav-link" href="{% url 'accounts:signup' %}">Sign up</a>
+      <a class="nav-link" href="{% url 'login' %}">Login</a>
       {% block search %}
       {% endblock %}
     </nav>
