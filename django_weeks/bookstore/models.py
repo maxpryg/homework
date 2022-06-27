@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.core.validators import MaxValueValidator
 
 from datetime import date
@@ -11,6 +12,7 @@ class Book(models.Model):
         validators=[MaxValueValidator(date.today().year,
         message="Release year can't be more than current year")])
     description = models.TextField(max_length=1000)
+    review = models.ForeignKey('Review', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f'{self.title}, {self.author}'
@@ -53,3 +55,10 @@ class Author(models.Model):
         """Return all books of certain author"""
 
         return Book.objects.filter(author__exact=self)
+
+
+class Review(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    review_text = models.TextField(max_length=2000)
