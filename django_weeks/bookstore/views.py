@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from .models import Book, Author
-from .forms import AddAuthorForm, AddBookForm
+from .forms import AddAuthorForm, AddBookForm, AddReviewForm
 
 
 def index(request):
@@ -21,9 +21,22 @@ def index(request):
 def book_detail(request, id):
     """Book detail view"""
     book = Book.objects.get(pk=id)
+    reviews = book.review_set.all()
+
+    if request.method == 'POST':
+        form = AddReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.book = book
+            review.save()
+            return HttpResponseRedirect(reverse('bookstore:book_detail',
+                                                args=[book.id]))
+    else:
+        form = AddReviewForm()
 
     return render(request, 'bookstore/book-detail.html',
-                  context={'book': book})
+                  context={'book': book, 'form': form, 'reviews': reviews})
 
 
 def author_detail(request, id):
