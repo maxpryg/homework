@@ -14,7 +14,7 @@ class Book(models.Model):
     description = models.TextField(max_length=1000)
 
     def __str__(self):
-        return f'{self.title}, {self.author}'
+        return f'{self.title}'
 
     @staticmethod
     def create_books_from_dict(books, authors):
