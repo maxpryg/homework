@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'firstapp',
     'bookstore',
     'accounts',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
