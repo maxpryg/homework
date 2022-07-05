@@ -1,6 +1,11 @@
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
+
+from firstapp.models import Store
+from firstapp.serializers import StoreSerializer
 
 from datetime import date
 
@@ -77,9 +82,24 @@ def calculator(request):
                          f'Bad action value. Acceptable values are: '
                          f'{", ".join(key for key in actions.keys())}'})
 
-    if number2 == 0:
+    if action == 'divide' and number2 == 0:
         return Response({'error': 'Division by zero.'})
 
     result = actions[action](number1, number2)
 
     return Response({'result': result})
+
+
+class StoreList(APIView):
+    """List all stores, or create a new store"""
+    def get(self, request, format=None):
+        stores = Store.objects.all()
+        serializer = StoreSerializer(stores, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = StoreSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -8,6 +8,7 @@ urlpatterns = [
     path('today/', views.today, name='today'),
     path('my_name/', views.my_name, name='my_name'),
     path('calculator/', views.calculator, name='calculator'),
+    path('stores/', views.StoreList.as_view()),
 
     path('date/', views.fulldate, name='fulldate'),
     path('date/year/', views.year, name='year'),
