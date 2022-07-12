@@ -2,6 +2,13 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework import mixins
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.decorators import action
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 from firstapp.models import Store
 from firstapp.serializers import StoreSerializer
@@ -75,3 +82,60 @@ class StoreList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class StoreViewSet(mixins.ListModelMixin,
+                   mixins.RetrieveModelMixin,
+                   viewsets.GenericViewSet):
+    queryset = Store.objects.all()
+    serializer_class = StoreSerializer
+
+
+class UserStoreViewSet(viewsets.ModelViewSet):
+    serializer_class = StoreSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Store.objects.filter(owner=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(**{"owner": self.request.user})
+
+    @action(detail=True, methods=['post'])
+    def mark_as_active(self, request, pk=None):
+        store = self.get_object()
+        if store.status == 'deactivated':
+            store.status = 'active'
+            store.save()
+        serializer = self.get_serializer(store)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['post'])
+    def mark_as_deactivated(self, request, pk=None):
+        store = self.get_object()
+        if store.status == 'active':
+            store.status = 'deactivated'
+            store.save()
+        serializer = self.get_serializer(store)
+        return Response(serializer.data)
+
+
+class AdminStoreViewSet(mixins.ListModelMixin,
+                   mixins.RetrieveModelMixin,
+                   viewsets.GenericViewSet):
+    queryset = Store.objects.all()
+    serializer_class = StoreSerializer
+    permission_classes = [IsAdminUser]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_fields = ['status']
+    search_fields = ['name']
+
+    @action(detail=True, methods=['post'])
+    def mark_as_active(self, request, pk=None):
+        store = self.get_object()
+        if store.status == 'in_review':
+            store.status = 'active'
+            store.save()
+        serializer = self.get_serializer(store)
+        return Response(serializer.data)
